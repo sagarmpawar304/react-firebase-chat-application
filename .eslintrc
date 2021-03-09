@@ -1,0 +1,38 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks",
+    "jest",
+    "prettier",
+    "prettier/react"
+  ],
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript",
+    "plugin:jest/recommended"
+  ],
+  "rules": {
+    "no-plusplus": [0],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", "ts", "tsx"]
+      }
+    ],
+    "react/prop-types": [0],
+    "react/jsx-props-no-spreading": [0],
+    "import/prefer-default-export": [0],
+    "react/no-array-index-key": [0],
+    "react/no-danger": [0],
+    "no-param-reassign": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
