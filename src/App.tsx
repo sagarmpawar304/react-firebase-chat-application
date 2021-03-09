@@ -4,6 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import GlobalStyles from './globalStyles';
 import For from './components/For';
 import routeConfig from './routeConfig';
+import Public from './components/PublicRouter';
+import Private from './components/PrivateRouter';
 
 function App() {
   return (
@@ -14,18 +16,26 @@ function App() {
         renderItem={(routeKey, index) => {
           // @ts-ignore
           const config = routeConfig[routeKey];
-          const { Component, exact, path } = config;
+          const { Component, exact, path, isPrivate } = config;
           return (
             <Route
               key={index}
               exact={exact}
               path={path}
-              render={(props) => {
+              render={props => {
                 const updatedProps = {
                   ...props,
                   ...config.props,
                 };
-                return <Component {...updatedProps} />;
+                return isPrivate ? (
+                  <Private>
+                    <Component {...updatedProps} />
+                  </Private>
+                ) : (
+                  <Public>
+                    <Component {...updatedProps} />
+                  </Public>
+                );
               }}
             />
           );
