@@ -18,6 +18,7 @@
     "@types/styled-components": "^5.1.7",
     "antd": "^4.13.1",
     "apisauce": "^2.0.1",
+    "firebase": "^8.2.10",
     "lodash": "^4.17.21",
     "node-sass": "^4.14.1",
     "react": "^16.14.0",

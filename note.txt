@@ -6,3 +6,22 @@ To fix it, you must downgrade node-sass to a compatible version. Please run the 
 npm i node-sass@4.14.1
 
 Note - 2
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAWjBh4z9bYJ3Vc4N8KsCpwfkmV2j9G3I8",
+    authDomain: "react-firebase-app-901a7.firebaseapp.com",
+    projectId: "react-firebase-app-901a7",
+    storageBucket: "react-firebase-app-901a7.appspot.com",
+    messagingSenderId: "575990615155",
+    appId: "1:575990615155:web:803e7a954e708d3fab6e06"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
