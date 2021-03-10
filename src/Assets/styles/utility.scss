@@ -154,8 +154,8 @@ $indent_3: 15px;
 }
 
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .px-0 {
@@ -164,7 +164,7 @@ $indent_3: 15px;
 }
 
 .p-0 {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .m-0 {

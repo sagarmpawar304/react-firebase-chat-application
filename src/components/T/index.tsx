@@ -1,20 +1,46 @@
 import React, { FC, memo } from 'react';
-import { Typography, Space } from 'antd';
+import Title from './index.styles';
 
-const { Title } = Typography;
+interface Props {
+  title: string;
+  level?: number;
+  className?: string;
+}
 
-const T: FC<{ title: string }> = ({ title = 'hello sarah' }) => {
+const T: FC<Props> = ({ title = 'Title', level = 1, className = '' }) => {
+  if (level === 2) {
+    return (
+      <Title className={className} level={2}>
+        {title}
+      </Title>
+    );
+  }
+  if (level === 3) {
+    return (
+      <Title className={className} level={3}>
+        {title}
+      </Title>
+    );
+  }
+  if (level === 4) {
+    return (
+      <Title className={className} level={4}>
+        {title}
+      </Title>
+    );
+  }
+  if (level === 5) {
+    return (
+      <Title className={className} level={5}>
+        {title}
+      </Title>
+    );
+  }
+
   return (
-    <Space direction='vertical'>
-      <Title level={1}>{title}</Title>
-      <Title level={2}>{title}</Title>
-      <div
-        dangerouslySetInnerHTML={{
-          __html:
-            '<h1>Diplayed data as it is using "dangerouslySetInnerHTML attr"</h1>',
-        }}
-      ></div>
-    </Space>
+    <Title className={className} level={1}>
+      {title}
+    </Title>
   );
 };
 
