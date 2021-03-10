@@ -1,23 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 
 import './index.scss';
-import configure from './configureStore';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AppProvider } from './contextAPI';
 
-const { store, persistor } = configure();
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <Router>
-        <App />
-      </Router>
-    </PersistGate>
-  </Provider>,
+  <AppProvider>
+    <Router>
+      <App />
+    </Router>
+  </AppProvider>,
 
   document.getElementById('root')
 );

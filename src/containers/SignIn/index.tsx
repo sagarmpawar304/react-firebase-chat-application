@@ -6,6 +6,7 @@ import firebase from 'firebase/app';
 
 import Text from '../../components/T';
 import { auth, database } from '../../utils/firebase';
+// import { useProvider } from '../../contextAPI';
 
 const CustomButton = styled(Button)`
   color: white;
@@ -39,6 +40,7 @@ const SignIn = () => {
           });
         }
         message.success('Succefully Signed In', 3);
+        // dispatch({ type: 'success', payload: user });
       }
     } catch (error) {
       console.log({ error });
