@@ -6,7 +6,7 @@ import {
   CheckSquareTwoTone,
 } from '@ant-design/icons';
 
-interface Props {
+export interface Props {
   initialValue?: string;
   placeHolder?: string;
   type?: string;
