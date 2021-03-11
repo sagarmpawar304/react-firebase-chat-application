@@ -6,7 +6,6 @@ import React, {
   FC,
   useReducer,
   useEffect,
-  useState,
 } from 'react';
 import profileReducer from './containers/SignIn/reducer';
 import { auth, database } from './utils/firebase';
