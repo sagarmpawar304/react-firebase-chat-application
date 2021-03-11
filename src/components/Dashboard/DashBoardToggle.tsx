@@ -24,15 +24,14 @@ const DashBoardToggle = () => {
         placement="left"
         visible={isOpen}
         onClose={close}
-        closable={false}
-        width={isMobile ? '90%' : '45%'}
+        width={isMobile ? '80%' : '45%'}
         footer={
           <Button danger onClick={signOut} block type="primary">
             Sign Out
           </Button>
         }
       >
-        <DashBoard signOut={signOut} />
+        <DashBoard />
       </Drawer>
     </>
   );
