@@ -3,7 +3,7 @@ import { Row, Col, message } from 'antd';
 import { FacebookFilled, GoogleCircleFilled } from '@ant-design/icons';
 import firebase from 'firebase/app';
 
-import Text from '../../components/T';
+import Title from 'antd/lib/typography/Title';
 import { auth, database } from '../../utils/firebase';
 // import { useProvider } from '../../contextAPI';
 import { Content, CustomButton } from './index.styled';
@@ -39,7 +39,7 @@ const SignIn = () => {
     <Content>
       <Row justify="center" align="middle">
         <Col xs={20} md={{ span: 12 }}>
-          <Text title="Welcome To Chat" className="text-center" />
+          <Title title="Welcome To Chat" className="text-center" />
           <CustomButton
             icon={<FacebookFilled />}
             block

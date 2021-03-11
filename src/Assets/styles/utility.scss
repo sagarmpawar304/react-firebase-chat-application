@@ -27,6 +27,10 @@ $indent_3: 15px;
   overflow: hidden !important;
 }
 
+.text-capitalize {
+  text-transform: capitalize;
+}
+
 .overflow-y-scroll {
   overflow-y: scroll;
 }
