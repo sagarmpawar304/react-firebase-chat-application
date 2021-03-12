@@ -13,7 +13,7 @@ const DashBoardToggle = () => {
     auth.signOut();
     message.info('Signed Out', 4);
     close();
-  }, []);
+  }, [close]);
   return (
     <>
       <Button type="primary" block onClick={open} icon={<DashboardTwoTone />}>

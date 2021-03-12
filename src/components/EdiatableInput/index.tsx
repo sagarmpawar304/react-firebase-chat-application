@@ -34,7 +34,7 @@ const EditableInput: FC<Props> = ({
   const [error, setError] = useState<boolean>(false);
 
   const handleChange = useCallback((value: string) => {
-    setInput(value.trim());
+    setInput(value);
     setError(false);
   }, []);
 
@@ -54,13 +54,13 @@ const EditableInput: FC<Props> = ({
       await onSave(trimmed);
     }
     setIsEditable(true);
-  }, [input]);
+  }, [input, onSave, initialValue]);
 
   return (
     <>
       {lable}
       <Row>
-        <Col xs={20}>
+        <Col xs={18}>
           <Input.Group>
             <Input
               type={type}
