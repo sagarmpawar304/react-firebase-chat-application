@@ -4,6 +4,7 @@ import Title from 'antd/lib/typography/Title';
 import EditableInput from '../EdiatableInput';
 import { database } from '../../utils/firebase';
 import { message } from 'antd';
+import ProviderBlock from '../ProviderBlock';
 
 const DashBoard: FC = () => {
   const { state } = useProvider();
@@ -26,6 +27,7 @@ const DashBoard: FC = () => {
       <Title level={4} className="text-capitalize">
         Hey, {profile?.name.split(' ')[0] || 'User'}
       </Title>
+      <ProviderBlock />
       <EditableInput
         onSave={onSave}
         initialValue={profile?.name || 'User'}
