@@ -1,17 +1,35 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import Modal from 'antd/lib/modal/Modal';
 import { useModalState } from '../../utils/customHooks';
 import { Button, message } from 'antd';
 import AvatarEditor from 'react-avatar-editor';
+import { storage, database } from '../../utils/firebase';
+import { useProvider } from '../../contextAPI';
 
 const fileInputTypes = '.png, .jpeg, .jpg';
 const acceptedInputTypes = ['image/png', 'image/jpeg', 'image/pjpeg'];
 
 const isValidType = (file: File) => acceptedInputTypes.includes(file.type);
 
+const getBlob = (canvas: any) => {
+  return new Promise((res, rej) => {
+    canvas.toBlob((blob: any) => {
+      if (blob) {
+        res(blob);
+      } else {
+        rej(new Error('file process error'));
+      }
+    });
+  });
+};
+
 const AvtarUploadBtn: FC = () => {
   const [img, setImg] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, open, close } = useModalState();
+  const avtarEditorRef = useRef();
+  const { state } = useProvider();
+  const { profile } = state;
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentFiles = e.target.files;
@@ -24,6 +42,38 @@ const AvtarUploadBtn: FC = () => {
         open();
       } else {
         message.warn(`Wrong file type ${file.type}`, 4);
+      }
+    }
+  };
+
+  const uploadAvtar = async () => {
+    const avtarEditor = avtarEditorRef.current;
+    if (avtarEditor) {
+      // @ts-ignore
+      const canvas = avtarEditor.getImageScaledToCanvas();
+      console.log(canvas);
+
+      setLoading(true);
+      try {
+        const blob = (await getBlob(canvas)) as Blob;
+        const avatarFileRef = storage
+          .ref(`/profile/${profile!.uid}`)
+          .child('avtar');
+        const uploadAvtarResult = await avatarFileRef.put(blob, {
+          cacheControl: `public, max-age=${3600 * 24 * 3}`,
+        });
+
+        const downloadUrl = await uploadAvtarResult.ref.getDownloadURL();
+
+        const userAvtarRef = database
+          .ref(`/profiles/${profile?.uid}`)
+          .child('avtar');
+        await userAvtarRef.set(downloadUrl);
+        setLoading(false);
+        message.success('Avatar has been uploaded', 4);
+      } catch (error) {
+        setLoading(false);
+        message.error(error.message, 4);
       }
     }
   };
@@ -48,19 +98,23 @@ const AvtarUploadBtn: FC = () => {
         visible={isOpen}
         onCancel={close}
         footer={
-          <Button type="primary" block>
+          <Button type="ghost" block onClick={uploadAvtar} disabled={loading}>
             Upload Avatar
           </Button>
         }
       >
         <div className="d-flex justify-content-center align-items-center h-100">
-          <AvatarEditor
-            image={img}
-            width={200}
-            height={200}
-            border={1}
-            borderRadius={100}
-          />
+          {img && (
+            <AvatarEditor
+              // @ts-ignore
+              ref={avtarEditorRef}
+              image={img}
+              width={200}
+              height={200}
+              border={1}
+              borderRadius={100}
+            />
+          )}
         </div>
       </Modal>
     </div>
