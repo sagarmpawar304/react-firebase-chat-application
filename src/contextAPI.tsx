@@ -16,6 +16,7 @@ interface Profile {
   createdAt: number;
   email: string;
   uid: string;
+  avatar?: string;
 }
 
 interface InitialState {
@@ -62,12 +63,13 @@ export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
       if (authObj) {
         userRef = database.ref(`/profiles/${authObj.uid}`);
         userRef.on('value', snap => {
-          const { name, createdAt } = snap.val();
+          const { name, createdAt, avatar } = snap.val();
           const data = {
             name,
             createdAt,
             uid: authObj.uid,
             email: authObj.email,
+            avatar,
           };
           dispatch({ type: 'success', payload: data });
           dispatch({ type: 'stop' });

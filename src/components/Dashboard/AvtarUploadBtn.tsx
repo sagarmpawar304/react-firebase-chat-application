@@ -5,6 +5,7 @@ import { Button, message } from 'antd';
 import AvatarEditor from 'react-avatar-editor';
 import { storage, database } from '../../utils/firebase';
 import { useProvider } from '../../contextAPI';
+import Avtarprofile from '../AvatarProfile/Avtarprofile';
 
 const fileInputTypes = '.png, .jpeg, .jpg';
 const acceptedInputTypes = ['image/png', 'image/jpeg', 'image/pjpeg'];
@@ -51,14 +52,13 @@ const AvtarUploadBtn: FC = () => {
     if (avtarEditor) {
       // @ts-ignore
       const canvas = avtarEditor.getImageScaledToCanvas();
-      console.log(canvas);
 
       setLoading(true);
       try {
         const blob = (await getBlob(canvas)) as Blob;
         const avatarFileRef = storage
           .ref(`/profile/${profile!.uid}`)
-          .child('avtar');
+          .child('avatar');
         const uploadAvtarResult = await avatarFileRef.put(blob, {
           cacheControl: `public, max-age=${3600 * 24 * 3}`,
         });
@@ -67,10 +67,11 @@ const AvtarUploadBtn: FC = () => {
 
         const userAvtarRef = database
           .ref(`/profiles/${profile?.uid}`)
-          .child('avtar');
+          .child('avatar');
         await userAvtarRef.set(downloadUrl);
         setLoading(false);
         message.success('Avatar has been uploaded', 4);
+        close();
       } catch (error) {
         setLoading(false);
         message.error(error.message, 4);
@@ -78,7 +79,8 @@ const AvtarUploadBtn: FC = () => {
     }
   };
   return (
-    <div className="mt-3 text-center">
+    <div className="mt-3 d-flex flex-column align-items-center">
+      <Avtarprofile name={profile?.name} src={profile?.avatar} />
       <label
         htmlFor="avtar-upload-btn"
         className="d-block cursor-pointer padded"
