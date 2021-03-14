@@ -4,7 +4,9 @@ import Title from 'antd/lib/typography/Title';
 import EditableInput from '../EdiatableInput';
 import { database } from '../../utils/firebase';
 import { message } from 'antd';
-import ProviderBlock from '../ProviderBlock';
+// @ts-ignore
+import ProviderBlock from './ProviderBlock';
+import AvtarUploadBtn from './AvtarUploadBtn';
 
 const DashBoard: FC = () => {
   const { state } = useProvider();
@@ -35,6 +37,7 @@ const DashBoard: FC = () => {
         placeHolder="Edit your name"
         emptyMsg="Name can't be empty"
       />
+      <AvtarUploadBtn />
     </>
   );
 };

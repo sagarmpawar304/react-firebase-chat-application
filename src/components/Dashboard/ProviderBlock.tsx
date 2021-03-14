@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Tag, Button, message } from 'antd';
 import { GoogleCircleFilled, FacebookFilled } from '@ant-design/icons';
 import { auth } from '../../utils/firebase';
 import firebase from 'firebase/app';
 
-const ProviderBlock = () => {
+const ProviderBlock: FC = () => {
   const [isConnected, setisConnected] = useState({
     'google.com': auth.currentUser?.providerData.some(
       data => data?.providerId === 'google.com'
@@ -65,14 +65,28 @@ const ProviderBlock = () => {
   return (
     <>
       {isConnected['google.com'] && (
-        <Tag closable color="red" onClose={unlinkGoogle}>
-          Connected to google
+        <Tag
+          closable
+          color="red"
+          onClose={e => {
+            e.preventDefault();
+            unlinkGoogle();
+          }}
+        >
+          Connected
         </Tag>
       )}
 
       {isConnected['facebook.com'] && (
-        <Tag closable color="blue" onClose={unlinkFacebook}>
-          Connected to faceBook
+        <Tag
+          closable
+          color="blue"
+          onClose={e => {
+            e.preventDefault();
+            unlinkFacebook();
+          }}
+        >
+          Connected
         </Tag>
       )}
 
