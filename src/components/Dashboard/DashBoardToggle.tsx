@@ -4,6 +4,7 @@ import { DashboardTwoTone } from '@ant-design/icons';
 import DashBoard from '.';
 import { useModalState, useMediaQuery } from '../../utils/customHooks';
 import { auth } from '../../utils/firebase';
+import CreateRoomBtnModal from './CreateRoomBtnModal';
 
 const DashBoardToggle = () => {
   const { isOpen, open, close } = useModalState();
@@ -19,6 +20,7 @@ const DashBoardToggle = () => {
       <Button type="primary" block onClick={open} icon={<DashboardTwoTone />}>
         Dashboard
       </Button>
+      <CreateRoomBtnModal />
       <Drawer
         title="Dashboard"
         placement="left"
