@@ -5,14 +5,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AppProvider } from './contextAPI';
+import { ProfileProvider } from './context/profile.context';
 
 ReactDOM.render(
-  <AppProvider>
+  <ProfileProvider>
     <Router>
       <App />
     </Router>
-  </AppProvider>,
+  </ProfileProvider>,
 
   document.getElementById('root')
 );

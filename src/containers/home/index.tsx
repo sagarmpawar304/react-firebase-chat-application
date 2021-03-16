@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <Content className="h-100">
       <Row className="h-100">
-        <Col xs={24} md={10} className="h-100">
+        <Col xs={24} md={8} className="h-100">
           <Sidebar />
         </Col>
       </Row>

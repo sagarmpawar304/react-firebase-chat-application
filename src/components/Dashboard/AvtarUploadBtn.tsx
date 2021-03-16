@@ -4,8 +4,8 @@ import { useModalState } from '../../utils/customHooks';
 import { Button, message } from 'antd';
 import AvatarEditor from 'react-avatar-editor';
 import { storage, database } from '../../utils/firebase';
-import { useProvider } from '../../contextAPI';
 import Avtarprofile from '../AvatarProfile/Avtarprofile';
+import { useProfileProvider } from '../../context/profile.context';
 
 const fileInputTypes = '.png, .jpeg, .jpg';
 const acceptedInputTypes = ['image/png', 'image/jpeg', 'image/pjpeg'];
@@ -29,8 +29,7 @@ const AvtarUploadBtn: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, open, close } = useModalState();
   const avtarEditorRef = useRef();
-  const { state } = useProvider();
-  const { profile } = state;
+  const { profile } = useProfileProvider();
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentFiles = e.target.files;

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useProvider } from '../../contextAPI';
 import Title from 'antd/lib/typography/Title';
 import EditableInput from '../EdiatableInput';
 import { database } from '../../utils/firebase';
@@ -7,10 +6,10 @@ import { message } from 'antd';
 // @ts-ignore
 import ProviderBlock from './ProviderBlock';
 import AvtarUploadBtn from './AvtarUploadBtn';
+import { useProfileProvider } from '../../context/profile.context';
 
 const DashBoard: FC = () => {
-  const { state } = useProvider();
-  const { profile } = state;
+  const { profile } = useProfileProvider();
 
   const onSave = async (value: string) => {
     const userNicknameRef = database

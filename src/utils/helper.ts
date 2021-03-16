@@ -5,3 +5,14 @@ export function getInitials(name: string) {
   }
   return splitedName[0].slice(0, 2);
 }
+
+export function transformToArray(snapValue: any) {
+  return snapValue
+    ? Object.keys(snapValue).map(id => {
+        return {
+          ...snapValue[id],
+          id,
+        };
+      })
+    : [];
+}

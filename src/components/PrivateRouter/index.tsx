@@ -1,16 +1,15 @@
 import React, { FC, ReactNode } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useProvider } from '../../contextAPI';
 import { Content } from 'antd/lib/layout/layout';
 import { Spin, Row } from 'antd';
+import { useProfileProvider } from '../../context/profile.context';
 
 type Props = {
   children: ReactNode;
 };
 
 const PrivateRouter: FC<Props> = ({ children }) => {
-  const { state } = useProvider();
-  const { profile, loading } = state;
+  const { profile, loading } = useProfileProvider();
 
   if (!profile && loading) {
     return (

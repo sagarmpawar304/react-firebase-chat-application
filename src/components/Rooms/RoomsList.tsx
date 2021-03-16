@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import RoomItem from './RoomItem';
 import MenuItem from 'antd/lib/menu/MenuItem';
 import styled from 'styled-components';
+import { RoomsProvider, useRoomsProvider } from '../../context/rooms.context';
 
 const Item = styled(MenuItem)`
   height: auto !important;
@@ -13,16 +14,23 @@ const Item = styled(MenuItem)`
 `;
 
 const RoomsList: FC<{ topSidebarHeight?: number }> = ({ topSidebarHeight }) => {
+  const rooms = useRoomsProvider();
+
   return (
-    <Menu
-      mode="vertical"
-      className="overflow-y-scroll custom-scroll"
-      style={{ height: `calc(100% - ${topSidebarHeight}px)` }}
-    >
-      <Item key="1">
-        <RoomItem />
-      </Item>
-    </Menu>
+    <RoomsProvider>
+      <Menu
+        mode="vertical"
+        className="overflow-y-scroll custom-scroll"
+        style={{ height: `calc(100% - ${topSidebarHeight}px)` }}
+      >
+        {rooms.length > 0 &&
+          rooms.map((room, index) => (
+            <Item key={index}>
+              <RoomItem room={room} />
+            </Item>
+          ))}
+      </Menu>
+    </RoomsProvider>
   );
 };
 
