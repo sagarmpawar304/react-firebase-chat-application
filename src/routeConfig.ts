@@ -4,7 +4,7 @@ import SignIn from './containers/SignIn';
 const routeConfig = {
   home: {
     path: '/',
-    exact: true,
+    exact: false,
     isPrivate: true,
     Component: Home,
   },

@@ -3,11 +3,9 @@ import TimeAgo from 'timeago-react';
 import { Room } from '../../context/rooms.context';
 
 const RoomItem: FC<{ room: Room }> = ({ room }) => {
-  console.log(room);
-
   const { name, description, createdAt } = room;
   return (
-    <div>
+    <div style={{ padding: '0.3rem 0' }}>
       <div className="d-flex justify-content-between align-items-center">
         <h2 className="text-disappear">{name}</h2>
         <TimeAgo

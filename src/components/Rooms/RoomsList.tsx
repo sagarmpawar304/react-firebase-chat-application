@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
-import { Menu } from 'antd';
-import RoomItem from './RoomItem';
+import { Menu, Spin } from 'antd';
 import MenuItem from 'antd/lib/menu/MenuItem';
 import styled from 'styled-components';
-import { RoomsProvider, useRoomsProvider } from '../../context/rooms.context';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+
+import { useRooms } from '../../context/rooms.context';
+import RoomItem from './RoomItem';
 
 const Item = styled(MenuItem)`
   height: auto !important;
@@ -13,11 +16,15 @@ const Item = styled(MenuItem)`
   }
 `;
 
-const RoomsList: FC<{ topSidebarHeight?: number }> = ({ topSidebarHeight }) => {
-  const rooms = useRoomsProvider();
+const antIcon = <LoadingOutlined spin />;
 
+const RoomsList: FC<{ topSidebarHeight?: number }> = ({ topSidebarHeight }) => {
+  const rooms = useRooms();
   return (
-    <RoomsProvider>
+    <>
+      {rooms.length === 0 && (
+        <Spin indicator={antIcon} size="default" spinning />
+      )}
       <Menu
         mode="vertical"
         className="overflow-y-scroll custom-scroll"
@@ -26,11 +33,13 @@ const RoomsList: FC<{ topSidebarHeight?: number }> = ({ topSidebarHeight }) => {
         {rooms.length > 0 &&
           rooms.map((room, index) => (
             <Item key={index}>
-              <RoomItem room={room} />
+              <Link to={`/chat/${room.id}`}>
+                <RoomItem room={room} />
+              </Link>
             </Item>
           ))}
       </Menu>
-    </RoomsProvider>
+    </>
   );
 };
 

@@ -27,6 +27,7 @@ export const RoomsProvider: FC<{ children: ReactNode }> = ({ children }) => {
       const values = transformToArray(snap.val());
       setRooms(values);
     });
+
     return () => {
       roomsListRef.off();
     };
@@ -37,6 +38,4 @@ export const RoomsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-export const useRoomsProvider = () => {
-  return useContext(RoomsContext);
-};
+export const useRooms = () => useContext(RoomsContext);
