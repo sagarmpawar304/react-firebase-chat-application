@@ -6,8 +6,8 @@ import Sidebar from '../../components/Sidebar';
 const Home = () => {
   return (
     <Content className="h-100">
-      <Row>
-        <Col xs={24} md={8}>
+      <Row className="h-100">
+        <Col xs={24} md={10} className="h-100">
           <Sidebar />
         </Col>
       </Row>

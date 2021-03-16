@@ -90,7 +90,7 @@ const CreateRoomBtnModal = () => {
           </Item>
 
           <Item>
-            <Button block type="primary" htmlType="submit">
+            <Button block type="primary" htmlType="submit" disabled={loading}>
               Create New Chat Room
             </Button>
           </Item>
