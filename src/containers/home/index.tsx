@@ -1,9 +1,11 @@
 import React from 'react';
 import { Content } from 'antd/lib/layout/layout';
-import { Row, Col, Image } from 'antd';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Row, Col } from 'antd';
+import Title from 'antd/lib/typography/Title';
+
 import Sidebar from '../../components/Sidebar';
 import { RoomsProvider } from '../../context/rooms.context';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import Chat from './Chat';
 import { useMediaQuery } from '../../utils/customHooks';
 
@@ -13,7 +15,6 @@ const Home = () => {
   const { isExact } = useRouteMatch();
 
   const canRenderSidebar = isTab || isExact;
-  console.log(isTab);
 
   return (
     <RoomsProvider>
@@ -37,7 +38,9 @@ const Home = () => {
             <Route>
               {isTab && (
                 <Col xs={24} md={16}>
-                  <h3 className="text-center mt-page">Please select chat</h3>
+                  <Title level={4} className="text-center mt-page">
+                    Please select chat
+                  </Title>
                 </Col>
               )}
             </Route>

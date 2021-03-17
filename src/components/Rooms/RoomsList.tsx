@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { useRooms } from '../../context/rooms.context';
 import RoomItem from './RoomItem';
+import Title from 'antd/lib/typography/Title';
 
 const Item = styled(MenuItem)`
   height: auto !important;
@@ -23,7 +24,9 @@ const RoomsList: FC<{ topSidebarHeight?: number }> = ({ topSidebarHeight }) => {
   return (
     <>
       {rooms.length === 0 && (
-        <Spin indicator={antIcon} size="default" spinning />
+        <Title level={2} className="text-center">
+          <Spin indicator={antIcon} size="large" spinning />
+        </Title>
       )}
       <Menu
         mode="vertical"
