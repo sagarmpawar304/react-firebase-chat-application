@@ -37,6 +37,7 @@
     "timeago-react": "^3.0.2",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.9",
+    "use-context-selector": "^1.2.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

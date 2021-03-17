@@ -5,9 +5,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
 
 import Top from '../../components/Chat-Window/Top';
-import Messages from '../../components/Chat-Window';
+import Messages from '../../components/Chat-Window/Messages';
 import Bottom from '../../components/Chat-Window/Bottom';
 import { useRooms } from '../../context/rooms.context';
+import { CurrentRoomContextProvider } from '../../context/current-room.context';
 
 const Chat = () => {
   const chatId = useLocation().pathname.split('/')[2];
@@ -32,7 +33,7 @@ const Chat = () => {
   }
 
   return (
-    <>
+    <CurrentRoomContextProvider data={currentRoom}>
       <div className="chat-top">
         <Top />
       </div>
@@ -44,7 +45,7 @@ const Chat = () => {
       <div className="chat-bottom">
         <Bottom />
       </div>
-    </>
+    </CurrentRoomContextProvider>
   );
 };
 
