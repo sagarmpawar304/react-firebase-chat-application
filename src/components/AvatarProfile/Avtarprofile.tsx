@@ -4,7 +4,7 @@ import { getInitials } from '../../utils/helper';
 
 const Avtarprofile = ({ name, ...props }: any) => {
   return (
-    <Avatar {...props} className="width-200 height-200 img-fullsize font-huge">
+    <Avatar {...props} className="img-fullsize font-huge">
       {getInitials(name)}
     </Avatar>
   );

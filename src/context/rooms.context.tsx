@@ -8,12 +8,20 @@ import React, {
 } from 'react';
 import { database } from '../utils/firebase';
 import { transformToArray } from '../utils/helper';
+import { Profile } from './profile.context';
 
 export interface Room {
   createdAt: number;
   name: string;
   description: string;
   id: string;
+  lastMessage?: {
+    author: Profile;
+    createdAt: number;
+    msgId: string;
+    roomId: string;
+    text: string;
+  };
 }
 
 const RoomsContext = createContext<Room[]>([]);

@@ -79,7 +79,11 @@ const AvtarUploadBtn: FC = () => {
   };
   return (
     <div className="mt-3 d-flex flex-column align-items-center">
-      <Avtarprofile name={profile?.name} src={profile?.avatar} />
+      <Avtarprofile
+        name={profile?.name}
+        src={profile?.avatar}
+        style={{ height: '200px', width: '200px' }}
+      />
       <label
         htmlFor="avtar-upload-btn"
         className="d-block cursor-pointer padded"
