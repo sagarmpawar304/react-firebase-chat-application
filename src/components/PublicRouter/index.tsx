@@ -10,7 +10,6 @@ type Props = {
 
 const PublicRouter: FC<Props> = ({ children }) => {
   const { profile, loading } = useProfileProvider();
-
   if (!profile && loading) {
     return (
       <Content>

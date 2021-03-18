@@ -19,6 +19,7 @@ const Item = styled(Form.Item)`
   }
 `;
 const validateMessages = {
+  // eslint-disable-next-line
   required: '${label} is required!',
 };
 

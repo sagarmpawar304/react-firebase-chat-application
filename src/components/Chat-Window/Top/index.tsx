@@ -14,7 +14,7 @@ const Top = () => {
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center">
-        <Title level={4}>
+        <Title level={4} className="text-disappear d-flex align-items-center">
           <Link to="/">
             <LeftCircleTwoTone
               size={16}

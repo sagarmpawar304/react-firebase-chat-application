@@ -9,7 +9,7 @@ import React, {
 import { database, auth } from '../utils/firebase';
 import firebase from 'firebase';
 
-interface Profile {
+export interface Profile {
   name: string;
   createdAt: number;
   email: string | null;

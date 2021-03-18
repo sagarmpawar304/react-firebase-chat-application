@@ -2,45 +2,22 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import GlobalStyles from './globalStyles';
-import For from './components/For';
-import routeConfig from './routeConfig';
 import Public from './components/PublicRouter';
 import Private from './components/PrivateRouter';
+import SignIn from './containers/SignIn';
+import Home from './containers/home';
 
 function App() {
   return (
     <>
-      <For
-        items={Object.keys(routeConfig)}
-        ParentComponent={(props: any) => <Switch {...props} />}
-        renderItem={(routeKey, index) => {
-          // @ts-ignore
-          const config = routeConfig[routeKey];
-          const { Component, exact, path, isPrivate } = config;
-          return (
-            <Route
-              key={index}
-              exact={exact}
-              path={path}
-              render={props => {
-                const updatedProps = {
-                  ...props,
-                  ...config.props,
-                };
-                return isPrivate ? (
-                  <Private>
-                    <Component {...updatedProps} />
-                  </Private>
-                ) : (
-                  <Public>
-                    <Component {...updatedProps} />
-                  </Public>
-                );
-              }}
-            />
-          );
-        }}
-      />
+      <Switch>
+        <Route
+          exact
+          path="/signin"
+          render={() => <Public>{<SignIn />}</Public>}
+        />
+        <Route path="/" render={() => <Private>{<Home />}</Private>} />
+      </Switch>
       <GlobalStyles />
     </>
   );

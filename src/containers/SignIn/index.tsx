@@ -5,8 +5,8 @@ import firebase from 'firebase/app';
 
 import Title from 'antd/lib/typography/Title';
 import { auth, database } from '../../utils/firebase';
-// import { useProvider } from '../../contextAPI';
 import { Content, CustomButton } from './index.styled';
+
 const SignIn = () => {
   const signInProvider = async (provider: any) => {
     try {
@@ -15,7 +15,7 @@ const SignIn = () => {
         if (additionalUserInfo.isNewUser) {
           await database.ref(`/profiles/${user.uid}`).set({
             name: user.displayName,
-            createAt: firebase.database.ServerValue.TIMESTAMP,
+            createdAt: firebase.database.ServerValue.TIMESTAMP,
           });
         }
         message.success('Succefully Signed In', 3);
