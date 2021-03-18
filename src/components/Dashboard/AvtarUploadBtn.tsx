@@ -6,6 +6,7 @@ import AvatarEditor from 'react-avatar-editor';
 import { storage, database } from '../../utils/firebase';
 import Avtarprofile from '../AvatarProfile/Avtarprofile';
 import { useProfileProvider } from '../../context/profile.context';
+import { getUserUpdates } from '../../utils/helper';
 
 const fileInputTypes = '.png, .jpeg, .jpg';
 const acceptedInputTypes = ['image/png', 'image/jpeg', 'image/pjpeg'];
@@ -64,10 +65,14 @@ const AvtarUploadBtn: FC = () => {
 
         const downloadUrl = await uploadAvtarResult.ref.getDownloadURL();
 
-        const userAvtarRef = database
-          .ref(`/profiles/${profile?.uid}`)
-          .child('avatar');
-        await userAvtarRef.set(downloadUrl);
+        const updates = await getUserUpdates(
+          profile?.uid!,
+          'avatar',
+          downloadUrl,
+          database
+        );
+
+        database.ref().update(updates);
         setLoading(false);
         message.success('Avatar has been uploaded', 4);
         close();

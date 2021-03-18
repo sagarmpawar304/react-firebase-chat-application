@@ -7,20 +7,25 @@ import { message } from 'antd';
 import ProviderBlock from './ProviderBlock';
 import AvtarUploadBtn from './AvtarUploadBtn';
 import { useProfileProvider } from '../../context/profile.context';
+import { getUserUpdates } from '../../utils/helper';
 
 const DashBoard: FC = () => {
   const { profile } = useProfileProvider();
 
   const onSave = async (value: string) => {
-    const userNicknameRef = database
-      .ref(`/profiles/${profile?.uid}`)
-      .child('name');
-
-    try {
-      await userNicknameRef.set(value);
-      message.success(`Nickname changed to "${value}".`);
-    } catch (error) {
-      message.info(error.message);
+    if (profile?.uid) {
+      try {
+        const updates = await getUserUpdates(
+          profile?.uid,
+          'name',
+          value,
+          database
+        );
+        database.ref().update(updates);
+        message.success(`Nickname changed to "${value}".`);
+      } catch (error) {
+        message.info(error.message);
+      }
     }
   };
   return (
